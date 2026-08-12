@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    if: ${{ !inputs.skip_branch_creation }}
+    if: ${{ github.event.inputs.skip_branch_creation != 'true' }}
     timeout-minutes: 5
     steps:
       - name: Checkout
@@ -145,7 +145,7 @@ jobs:
     permissions:
       contents: read
     needs: [discover-and-generate]
-    if: ${{ !inputs.dry_run }}
+    if: ${{ github.event.inputs.dry_run == 'false' }}
     timeout-minutes: 10
     steps:
       - name: Check for dashboard token
